@@ -143,7 +143,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     gps.msm8998 \
     gps.conf \
-    libgnsspps
+    libgnsspps \
+    libcurl
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/flp.conf:system/vendor/etc/flp.conf \
@@ -306,6 +307,10 @@ PRODUCT_PACKAGES += \
     librmnetctl \
     libxml2 \
     libprotobuf-cpp-full
+
+# Vehicle network (for slim_daemon)
+PRODUCT_PACKAGES += \
+    libvehiclenetwork-native
 
 # Wifi
 PRODUCT_PACKAGES += \
