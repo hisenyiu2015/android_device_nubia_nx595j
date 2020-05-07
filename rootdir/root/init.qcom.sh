@@ -351,6 +351,18 @@ case "$target" in
         ;;
     esac
 
+#NUBIA ADD
+device_name=`getprop ro.product.device`
+case "$device_name" in
+        "NX563J")
+	setprop qemu.hw.mainkeys 1
+        ;;
+	"NX595J")
+	setprop qemu.hw.mainkeys 0
+	;;
+esac
+#NUBIA ADD END
+
 #
 # Copy qcril.db if needed for RIL
 #

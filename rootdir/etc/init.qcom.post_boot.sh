@@ -482,14 +482,16 @@ case "$target" in
                         "Surf")
                             case "$platform_subtype_id" in
                                 "1")
-                                    start hbtp
+                                    #start hbtp
+                                    echo "nubia delete hbtp"
                                 ;;
                             esac
                         ;;
                         "MTP")
                             case "$platform_subtype_id" in
                                 "3")
-                                    start hbtp
+                                    #start hbtp
+                                    echo "nubia delete hbtp"
                                 ;;
                             esac
                         ;;
@@ -1142,7 +1144,8 @@ case "$target" in
                         #1200p panel is connected to the device.
                         dir="/sys/bus/i2c/devices/3-0038"
                         if [ ! -d "$dir" ]; then
-                              start hbtp
+                              #start hbtp
+                              echo "nubia delete hbtp"
                         fi
                         ;;
                 esac
@@ -1356,7 +1359,8 @@ case "$target" in
                   # Start Host based Touch processing
                   case "$hw_platform" in
                     "MTP" | "Surf" | "RCM" )
-                        start hbtp
+                        #start hbtp
+                        echo "nubia delete hbtp"
                         ;;
                   esac
                 # Apply Scheduler and Governor settings for 8917 / 8920
@@ -1469,7 +1473,8 @@ case "$target" in
                   # Start Host based Touch processing
                   case "$hw_platform" in
                     "MTP" | "Surf" | "RCM" )
-                        start hbtp
+                        #start hbtp
+                        echo "nubia delete hbtp"
                         ;;
                   esac
 
@@ -1779,7 +1784,8 @@ case "$target" in
                         "MTP" | "Surf" | "RCM" | "QRD" )
                         bootmode=`getprop ro.bootmode`
                         if [ "$bootmode" != "charger" ]; then
-                                start hbtp
+                                echo "nubia delete hbtp"
+                                #start hbtp
                         fi
                         ;;
                 esac
@@ -1794,7 +1800,8 @@ case "$target" in
                 "MTP" | "Surf" | "RCM" | "QRD" )
                 bootmode=`getprop ro.bootmode`
                 if [ "$bootmode" != "charger" ]; then
-                        start hbtp
+                        echo "nubia delete hbtp"
+                        #start hbtp
                 fi
                 ;;
             esac
@@ -2387,12 +2394,12 @@ case "$target" in
 	echo 19000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
 	echo 90 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
 	echo 20000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
-	echo 1248000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
+	echo 1171200 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
 	echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
 	echo "83 1804800:95" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
 	echo 19000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
 	echo 79000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis
-	echo 300000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+	echo 518400 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 	echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/ignore_hispeed_on_notif
         # online CPU4
         echo 1 > /sys/devices/system/cpu/cpu4/online
@@ -2403,12 +2410,12 @@ case "$target" in
 	echo 19000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
 	echo 90 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
 	echo 20000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
-	echo 1574400 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
+	echo 1536000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
 	echo 1 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/io_is_busy
 	echo "83 1939200:90 2016000:95" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
 	echo 19000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
 	echo 79000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/max_freq_hysteresis
-	echo 300000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
+	echo 806400 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
 	echo 1 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/ignore_hispeed_on_notif
 
         # re-enable thermal and BCL hotplug
@@ -2471,12 +2478,14 @@ case "$target" in
 		"QRD")
 			case "$platform_subtype_id" in
 				"0")
-					start hbtp
+					# start hbtp
+					echo "nubia delete hbtp"
 					;;
 				"16")
 					if [ $platform_major_version -lt 6 ]; then
-						echo 0 > /sys/class/graphics/fb1/hpd
-						start hbtp
+						echo "nubia delete hbtp"
+						#echo 0 > /sys/class/graphics/fb1/hpd
+						#start hbtp
 					fi
 					;;
 			esac
@@ -2484,14 +2493,16 @@ case "$target" in
 		"Surf")
 			case "$platform_subtype_id" in
 				"1")
-					start hbtp
+					#start hbtp
+					echo "nubia delete hbtp"
 				;;
 			esac
 			;;
 		"MTP")
 			case "$platform_subtype_id" in
 				"2")
-					start hbtp
+					#start hbtp
+					echo "nubia delete hbtp"
 				;;
 			esac
 			;;
@@ -2512,8 +2523,8 @@ case "$target" in
 	echo N > /sys/module/lpm_levels/system/perf/perf-l2-dynret/idle_enabled
 	echo N > /sys/module/lpm_levels/system/perf/perf-l2-ret/idle_enabled
 	echo N > /sys/module/lpm_levels/parameters/sleep_disabled
-        echo 0-3 > /dev/cpuset/background/cpus
-        echo 0-3 > /dev/cpuset/system-background/cpus
+#        echo 0-3 > /dev/cpuset/background/cpus
+#        echo 0-3 > /dev/cpuset/system-background/cpus
         echo 0 > /proc/sys/kernel/sched_boost
     ;;
 esac

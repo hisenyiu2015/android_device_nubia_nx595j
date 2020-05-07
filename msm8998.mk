@@ -128,6 +128,9 @@ PRODUCT_PACKAGES += \
     liboverlay \
     libtinyxml
 
+PRODUCT_PACKAGES += \
+    qdcm_calib_data_jdi_nt35596s_1080x2040_mipi_video_panel.xml
+
 # Fingerprint
 PRODUCT_PACKAGES += \
     fingerprintd
@@ -235,16 +238,15 @@ PRODUCT_PACKAGES += \
     init.class_main.sh \
     init.mdm.sh \
     init.msm.usb.configfs.rc \
+    init.nubia.rc \
+    init.nubia.touch.lcd.rc \
     init.qcom.class_core.sh \
     init.qcom.crashdata.sh \
     init.qcom.early_boot.sh \
-    init.qcom.factory.rc \
     init.qcom.rc \
     init.qcom.sensors.sh \
     init.qcom.sh \
-    init.qcom.ssr.sh \
     init.qcom.syspart_fixup.sh \
-    init.qcom.test.rc \
     init.qcom.usb.rc \
     init.qcom.usb.sh \
     init.target.rc \
@@ -258,14 +260,10 @@ PRODUCT_PACKAGES += \
     init.qcom.audio.sh \
     init.qcom.bt.sh \
     init.qcom.coex.sh \
-    init.qcom.debug-sdm660.sh \
-    init.qcom.debug.sh \
     init.qcom.efs.sync.sh \
     init.qcom.fm.sh \
-    init.qcom.modem_links.sh \
     init.qcom.post_boot.sh \
     init.qcom.sdio.sh \
-    init.qcom.testscripts.sh \
     init.qcom.uicc.sh \
     init.qcom.wifi.sh \
     init.qti.ims.sh \

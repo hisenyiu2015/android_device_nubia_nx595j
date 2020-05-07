@@ -21,10 +21,13 @@ ro.telephony.default_network=22,20
 
 debug.sf.hw=1
 debug.gralloc.enable_fb_ubwc=1
-dalvik.vm.heapsize=36m
+#nubia del
+#dalvik.vm.heapsize=36m
+#nubia del end
 dev.pm.dyn_samplingrate=1
 persist.demo.hdmirotationlock=false
 sdm.debug.disable_partial_split=1
+sdm.composition_simulation=8192
 
 #ro.hdmi.enable=true
 #
@@ -43,7 +46,9 @@ media.aac_51_output_enabled=true
 mm.enable.smoothstreaming=true
 #13631487 is decimal sum of supported codecs in AAL
 #codecs:(PARSER_)AAC AC3 AMR_NB AMR_WB ASF AVI DTS FLV 3GP 3G2 MKV MP2PS MP2TS MP3 OGG QCP WAV FLAC AIFF APE DSD
-mm.enable.qcom_parser=13631487
+# mm.enable.qcom_parser from 13631487 to 13631231 ,resolved pr00401392 by nubia lixianglin begin
+mm.enable.qcom_parser=13631231
+# mm.enable.qcom_parser from 13631487 to 13631231 ,resolved pr00401392 by nubia lixianglin end
 persist.mm.enable.prefetch=true
 
 # Additional buffers shared between Camera and Video
@@ -72,7 +77,7 @@ bt.max.hfpclient.connections=1
 persist.bt.a2dp.aac_disable=true
 
 # System property for cabl
-ro.qualcomm.cabl=2
+ro.qualcomm.cabl=0
 
 #
 # System props for telephony
@@ -167,8 +172,18 @@ ro.qti.sensors.dpc=true
 #MultiShake sensor
 ro.qti.sensors.multishake=true
 #IOD sensor
-ro.qti.sensors.iod=true
+ro.qti.sensors.iod=false
 
+#ZTEMT:added by guxiaodong for Camera Video Beauty Trigger Switch --start
+persist.camera.vdbea.switch=1
+#ZTEMT:added by guxiaodong for Camera Video Beauty Trigger Switch --end
+
+#ZTEMT add for get total camera number
+ro.total.camera.number=4
+#ZTEMT add for focus
+persist.camera.depth.focus.cb=0
+#ZTEMT add for Expose aux camera for below packages
+camera.aux.packagelist=com.android.camera,cn.nubia.factory,org.codeaurora.snapcam
 #Enable stm events
 persist.debug.coresight.config=stm-events
 
@@ -178,5 +193,89 @@ persist.ts.rtmakeup=false
 #Set cutoff voltage to 3200mV
 ro.cutoff_voltage_mv=3200
 
-#Expose aux camera for below packages
-camera.aux.packagelist=org.codeaurora.snapcam,com.qualcomm.saltproject,com.qualcomm.saltproject2
+# nubia add start
+# Charger
+persist.sys.standard_charger=USB_HVDCP_3
+
+# NFC
+persist.nfc.smartcard.config=SIM1,eSE1
+
+# Audio
+af.fast_track_multiplier=2
+audio_hal.period_size=192
+ro.qc.sdk.audio.fluencetype=fluence
+persist.audio.fluence.voicecall=true
+persist.audio.fluence.voicerec=false
+persist.audio.fluence.speaker=false
+tunnel.audio.encode=false
+persist.audio.ras.enabled=false
+audio.offload.disable=true
+audio.offload.buffer.size.kb=32
+audio.offload.video=true
+audio.offload.pcm.16bit.enable=true
+audio.offload.pcm.24bit.enable=true
+audio.offload.track.enable=false
+audio.deep_buffer.media=true
+audio.heap.size.multiplier=7
+use.voice.path.for.pcm.voip=true
+audio.offload.multiaac.enable=true
+audio.dolby.ds2.enabled=true
+audio.dolby.ds2.hardbypass=true
+audio.offload.multiple.enabled=false
+audio.offload.passthrough=false
+ro.qc.sdk.audio.ssr=false
+audio.offload.gapless.enabled=true
+audio.safx.pbe.enabled=true
+audio.parser.ip.buffer.size=0
+flac.sw.decoder.24bit.support=true
+persist.bt.a2dp_offload_cap=sbc
+use.qti.sw.alac.decoder=true
+use.qti.sw.ape.decoder=true
+qcom.hw.aac.encoder=true
+fm.a2dp.conc.disabled=true
+audio.noisy.broadcast.delay=600
+audio.offload.pstimeout.secs=3
+audio.adm.buffering.ms=3
+
+# Bluetooth
+ro.bluetooth.emb_wp_mode=false
+ro.bluetooth.wipower=false
+
+# RIL
+persist.sys.ssr.restart_level=3
+persist.sys.ap.restart_level=0
+keyguard.no_require_sim=true
+
+ro.telephony.default_cdma_sub=0
+persist.radio.primarycard=true
+persist.radio.rat_on=combine
+ro.com.android.mobiledata=false
+ro.telephony.default_ca_state=1
+
+persist.radio.calls.on.ims=0
+persist.radio.jbims=0
+persist.radio.csvt.enabled=false
+persist.radio.mt_sms_ack=20
+
+# FRP
+ro.frp.pst=/dev/block/bootdevice/by-name/frp
+
+# DRM
+drm.service.enabled=true
+
+# Timezone
+persist.sys.timezone=Asia/Shanghai
+
+# IMS
+persist.dbg.ims_volte_enable=1
+persist.dbg.volte_avail_ovr=1
+persist.dbg.vt_avail_ovr=1
+persist.radio.videopause.mode=1
+persist.data.iwlan.enable=true
+persist.dbg.wfc_avail_ovr=1
+
+# enable mbn file update for SIMTrigger
+persist.radio.sw_mbn_update=0
+persist.radio.hw_mbn_update=0
+# nubia add end
+

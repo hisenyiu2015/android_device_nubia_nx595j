@@ -40,8 +40,14 @@ on init
     write /dev/stune/top-app/schedtune.colocate 1
 
 on fs
+    chown system system /dev/goodix_fp
     wait /dev/block/platform/soc/1da4000.ufshc
     symlink /dev/block/platform/soc/1da4000.ufshc /dev/block/bootdevice
+
+# modify for boot mount persist partition fix reformat partition issue
+    mkdir /persist/data 0700 system system
+    mkdir /persist/bms 0700 root system
+    restorecon_recursive /persist
     mount_all fstab.qcom
     swapon_all fstab.qcom
 
@@ -52,6 +58,7 @@ on fs
     mkdir /persist/data 0700 system system
     mkdir /persist/bms 0700 root system
     restorecon_recursive /persist
+    write /sys/kernel/boot_adsp/boot 1
 
 on post-fs
     start qseecomd
@@ -105,6 +112,24 @@ on boot
    chown system system /persist/speccfg/vendor_persist.prop
    chown system system /persist/speccfg/submask
    chown system system /persist/speccfg/partition
+
+   #for audio driver to read
+   chmod 0644 /persist/tas2555_cal.bin
+
+# Tuxera exFAT kernel module
+    insmod /system/lib/modules/texfat.ko
+
+#install video modules
+   insmod /system/lib/modules/msm-vidc-vmem.ko
+   insmod /system/lib/modules/msm-vidc.ko
+   insmod /system/lib/modules/msm-vidc-dyn-gov.ko
+   insmod /system/lib/modules/msm-vidc-table-gov.ko
+
+#fingerprint service
+service fingerprintd /system/bin/fingerprintd
+    class late_start
+    user system
+    group media_rw system
 
 #Peripheral manager
 service per_mgr /system/bin/pm-service
@@ -390,6 +415,19 @@ on property:init.svc.zygote=running
 on property:init.svc.zygote=restarting
     stop ppd
 
+on charger
+    wait /dev/block/bootdevice/by-name/persist
+    mount ext4 /dev/block/bootdevice/by-name/persist /persist nosuid nodev barrier=1
+    wait /dev/block/bootdevice/by-name/cache
+    mount ext4 /dev/block/bootdevice/by-name/cache /cache nosuid nodev barrier=1
+    mount_all fstab.qcom
+    restorecon_recursive /persist
+    restorecon_recursive /cache
+    restorecon_recursive /sys/kernel/debug
+    rm /sdcard
+    symlink /cache /sdcard
+    load_system_props
+    start qcom-post-boot
 #
 #service nqs /system/bin/nqs
 #    class late_start
@@ -426,6 +464,47 @@ service mdtpd /system/vendor/bin/mdtpd
     user root
     group system radio drmrpc
 
+#dm instructions added by nubia
+service dmapp /system/bin/dmapp
+    class main
+    seclabel u:r:dm:s0
+
+#LCD display preference added by nubia
+on property:persist.sys.image.enhance=w
+    write /sys/kernel/lcd_enhance/saturation 24
+
+on property:persist.sys.image.enhance=n
+    write /sys/kernel/lcd_enhance/saturation 25
+
+on property:persist.sys.image.enhance=i
+    write /sys/kernel/lcd_enhance/saturation 26
+
+on property:persist.sys.image.colortmp=w
+    write /sys/kernel/lcd_enhance/colortmp 24
+
+on property:persist.sys.image.colortmp=n
+    write /sys/kernel/lcd_enhance/colortmp 25
+
+on property:persist.sys.image.colortmp=c
+    write /sys/kernel/lcd_enhance/colortmp 26
+
+#for lcd colortmp continuous
+on property:persist.sys.lcd.colortmp=*
+   write /sys/kernel/lcd_enhance/colortmp ${persist.sys.lcd.colortmp}
+
+on property:persist.sys.image.cabc=f
+    write /sys/kernel/lcd_enhance/cabc 23
+
+on property:persist.sys.image.cabc=l
+    write /sys/kernel/lcd_enhance/cabc 24
+
+on property:persist.sys.image.cabc=m
+    write /sys/kernel/lcd_enhance/cabc 25
+
+on property:persist.sys.image.cabc=h
+    write /sys/kernel/lcd_enhance/cabc 26
+#LCD display preference end
+
 service hvdcp_opti /system/bin/hvdcp_opti
      class main
      user root
@@ -446,3 +525,19 @@ service qdmastatsd /system/bin/qdmastatsd
     class late_start
     user system
     group system
+
+on late-fs
+# boot time fs tune
+   write /sys/block/sda/queue/iostats 0
+   write /sys/block/sda/queue/read_ahead_kb 2048
+   write /sys/block/sda/queue/nr_requests 256
+   write /sys/block/dm-0/queue/read_ahead_kb 2048
+   write /sys/block/dm-1/queue/read_ahead_kb 2048
+
+on property:sys.boot_completed =1
+# end boot time fs tune
+   write /sys/block/sda/queue/iostats 1
+   write /sys/block/sda/queue/read_ahead_kb 128
+   write /sys/block/sda/queue/nr_requests 128
+   write /sys/block/dm-0/queue/read_ahead_kb 512
+   write /sys/block/dm-1/queue/read_ahead_kb 512

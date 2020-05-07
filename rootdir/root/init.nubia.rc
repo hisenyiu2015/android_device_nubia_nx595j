@@ -1,4 +1,4 @@
-# Copyright (c) 2013, The Linux Foundation. All rights reserved.
+# Copyright (c) 2011-2013, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are
@@ -24,12 +24,31 @@
 # WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
 # OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
 # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+#
 
-#device         mount point      fstype        [device2] [length=]
+import init.nubia.touch.lcd.rc
 
-/dev/block/bootdevice/by-name/cache        /cache          ext4    noatime,nosuid,nodev,barrier=1,data=ordered                     wait,check
-/dev/block/bootdevice/by-name/system       /system         ext4    ro,barrier=1,discard                                            wait
-/dev/block/bootdevice/by-name/userdata     /data           ext4    nosuid,nodev,barrier=1,noauto_da_alloc,discard                  wait,check,fileencryption=ice
-/dev/block/bootdevice/by-name/boot         /boot           emmc    defaults                                                        defaults
-/dev/block/bootdevice/by-name/recovery     /recovery       emmc    defaults                                                        defaults
-/dev/block/bootdevice/by-name/misc         /misc           emmc    defaults                                                        defaults
+# nubia Disable SSR to SoC restart
+on property:persist.sys.ssr.restart_level=1
+    write /sys/bus/msm_subsys/devices/subsys0/restart_level system
+    write /sys/bus/msm_subsys/devices/subsys1/restart_level system
+    write /sys/bus/msm_subsys/devices/subsys2/restart_level system
+    write /sys/bus/msm_subsys/devices/subsys3/restart_level system
+    write /sys/bus/msm_subsys/devices/subsys4/restart_level system
+    write /sys/bus/msm_subsys/devices/subsys5/restart_level system
+    write /sys/bus/msm_subsys/devices/subsys6/restart_level system
+
+# Enable SSR
+on property:persist.sys.ssr.restart_level=3
+    write /sys/bus/msm_subsys/devices/subsys0/restart_level related
+    write /sys/bus/msm_subsys/devices/subsys1/restart_level related
+    write /sys/bus/msm_subsys/devices/subsys2/restart_level related
+    write /sys/bus/msm_subsys/devices/subsys3/restart_level related
+    write /sys/bus/msm_subsys/devices/subsys4/restart_level related
+    write /sys/bus/msm_subsys/devices/subsys5/restart_level related
+    write /sys/bus/msm_subsys/devices/subsys6/restart_level related
+
+on property:persist.sys.ap.restart_level=*
+    write /sys/module/msm_poweroff/parameters/download_mode ${persist.sys.ap.restart_level}
+

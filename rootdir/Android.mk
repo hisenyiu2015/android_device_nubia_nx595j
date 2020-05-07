@@ -33,6 +33,22 @@ LOCAL_MODULE_PATH  := $(TARGET_ROOT_OUT)
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
+LOCAL_MODULE       := init.nubia.rc
+LOCAL_MODULE_TAGS  := optional eng
+LOCAL_MODULE_CLASS := ETC
+LOCAL_SRC_FILES    := root/init.nubia.rc
+LOCAL_MODULE_PATH  := $(TARGET_ROOT_OUT)
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE       := init.nubia.touch.lcd.rc
+LOCAL_MODULE_TAGS  := optional eng
+LOCAL_MODULE_CLASS := ETC
+LOCAL_SRC_FILES    := root/init.nubia.touch.lcd.rc
+LOCAL_MODULE_PATH  := $(TARGET_ROOT_OUT)
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
 LOCAL_MODULE       := init.qcom.class_core.sh
 LOCAL_MODULE_TAGS  := optional eng
 LOCAL_MODULE_CLASS := ETC
@@ -53,14 +69,6 @@ LOCAL_MODULE       := init.qcom.early_boot.sh
 LOCAL_MODULE_TAGS  := optional eng
 LOCAL_MODULE_CLASS := ETC
 LOCAL_SRC_FILES    := root/init.qcom.early_boot.sh
-LOCAL_MODULE_PATH  := $(TARGET_ROOT_OUT)
-include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE       := init.qcom.factory.rc
-LOCAL_MODULE_TAGS  := optional eng
-LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := root/init.qcom.factory.rc
 LOCAL_MODULE_PATH  := $(TARGET_ROOT_OUT)
 include $(BUILD_PREBUILT)
 
@@ -89,26 +97,10 @@ LOCAL_MODULE_PATH  := $(TARGET_ROOT_OUT)
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE       := init.qcom.ssr.sh
-LOCAL_MODULE_TAGS  := optional eng
-LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := root/init.qcom.ssr.sh
-LOCAL_MODULE_PATH  := $(TARGET_ROOT_OUT)
-include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
 LOCAL_MODULE       := init.qcom.syspart_fixup.sh
 LOCAL_MODULE_TAGS  := optional eng
 LOCAL_MODULE_CLASS := ETC
 LOCAL_SRC_FILES    := root/init.qcom.syspart_fixup.sh
-LOCAL_MODULE_PATH  := $(TARGET_ROOT_OUT)
-include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE       := init.qcom.test.rc
-LOCAL_MODULE_TAGS  := optional eng
-LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := root/init.qcom.test.rc
 LOCAL_MODULE_PATH  := $(TARGET_ROOT_OUT)
 include $(BUILD_PREBUILT)
 
@@ -196,20 +188,6 @@ LOCAL_SRC_FILES    := etc/init.qcom.coex.sh
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE       := init.qcom.debug-sdm660.sh
-LOCAL_MODULE_TAGS  := debug
-LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := etc/init.qcom.debug-sdm660.sh
-include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE       := init.qcom.debug.sh
-LOCAL_MODULE_TAGS  := debug
-LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := etc/init.qcom.debug.sh
-include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
 LOCAL_MODULE       := init.qcom.efs.sync.sh
 LOCAL_MODULE_TAGS  := optional eng
 LOCAL_MODULE_CLASS := ETC
@@ -224,13 +202,6 @@ LOCAL_SRC_FILES    := etc/init.qcom.fm.sh
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE       := init.qcom.modem_links.sh
-LOCAL_MODULE_TAGS  := optional eng
-LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := etc/init.qcom.modem_links.sh
-include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
 LOCAL_MODULE       := init.qcom.post_boot.sh
 LOCAL_MODULE_TAGS  := optional eng
 LOCAL_MODULE_CLASS := ETC
@@ -242,13 +213,6 @@ LOCAL_MODULE       := init.qcom.sdio.sh
 LOCAL_MODULE_TAGS  := optional eng
 LOCAL_MODULE_CLASS := ETC
 LOCAL_SRC_FILES    := etc/init.qcom.sdio.sh
-include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE       := init.qcom.testscripts.sh
-LOCAL_MODULE_TAGS  := optional eng
-LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := etc/init.qcom.testscripts.sh
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
