@@ -139,6 +139,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     fs_config_files
 
+# GPS
+PRODUCT_PACKAGES += \
+    gps.msm8998 \
+    gps.conf
+
 # IPv6
 PRODUCT_PACKAGES += \
     ebtables \
