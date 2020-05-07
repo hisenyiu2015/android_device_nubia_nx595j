@@ -1,0 +1,14 @@
+[
+  {
+   "remote"     : "carbon",
+   "repository" : "CarbonROM/android_device_qcom_common",
+   "target_path": "device/qcom/common",
+   "revision"   : "cr-5.1"
+  },
+  {
+   "remote"     : "lineage",
+   "repository" : "LineageOS/android_external_json-c",
+   "target_path": "external/json-c",
+   "revision"   : "cm-14.1"
+  }
+]
